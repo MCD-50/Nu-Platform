@@ -83,6 +83,7 @@ export const createDocument = async (req, res) => {
 					from: constant.config.wallet.transferWalletAccountAddress,
 					to: constant.CONTRACT_ADDRESS,
 					value: _payload,
+					methodName: "addDocument",
 					privateKey: constant.config.wallet.transferWalletAccountKey,
 				};
 
@@ -106,7 +107,6 @@ export const createDocument = async (req, res) => {
 					return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 				}
 
-				// contractInstance.methods.getCurrentId().call().then(res => console.log(res)).catch(exe => console.log(exe));
 				return res.status(200).json({ result: _data });
 			} else {
 				return res.status(400).json(collection.getErrorResponse("Something went wrong"));
@@ -119,7 +119,7 @@ export const createDocument = async (req, res) => {
 };
 
 export const createGrant = async (req, res) => {
-	if (req.body && req.body.walletAddress && req.body.password && req.body.email && req.body.capsuleId && req.body.publicKey) {
+	if (req.body && req.body.walletAddress && req.body.password && req.body.capsuleId) {
 		// first get address from web3
 
 		const _account = await accountService._getAccountByFilter(req.app, { accountAddress: req.body.walletAddress });
@@ -128,15 +128,21 @@ export const createGrant = async (req, res) => {
 		}
 
 		const result = {
-			email: req.body.email,
+			email: _account.email,
+			publicKey: _account.publicKey,
 			accountAddress: req.body.walletAddress,
 			capsuleId: req.body.capsuleId,
-			publicKey: req.body.publicKey,
 		};
 
 		// get the upload info
 		const _upload = await uploadService._getUploadByFilter(req.app, { capsuleId: req.body.capsuleId });
 		if (_upload == null) {
+			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+		}
+
+		// get uploaders email
+		const _uploaderAccount = await accountService._getAccountByFilter(req.app, { accountAddress: _upload.accountAddress });
+		if (_uploaderAccount == null) {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
 
@@ -147,7 +153,7 @@ export const createGrant = async (req, res) => {
 		}
 
 		// now send and request to 
-		_mailClient.sendVanillaMail({ email: _upload.email, description: `Please give me access to your uploaded dna data. My email address is ${_grant.email}. My address is ${_grant.accountAddress}. Click on link to process the request ${constant.config.platform.notifyUrl}/processGrant/${_grant._id}/${_upload._id}` });
+		_mailClient.sendVanillaMail({ email: _uploaderAccount.email, description: `Please give me access to your uploaded dna data. My email address is ${_grant.email}. My address is ${_grant.accountAddress}. Click on link to process the request ${constant.config.platform.selfLink}/processGrant/${_grant._id}/${_upload._id}` });
 
 		return res.status(200).json({ result: _grant, });
 	} else {
@@ -198,6 +204,7 @@ export const processGrant = async (req, res) => {
 			from: constant.config.wallet.transferWalletAccountAddress,
 			to: constant.CONTRACT_ADDRESS,
 			value: _payload,
+			methodName: "addGrant",
 			privateKey: constant.config.wallet.transferWalletAccountKey,
 		};
 
@@ -207,14 +214,13 @@ export const processGrant = async (req, res) => {
 			return res.status(400).json(collection.getErrorResponse("Unable to make blockchain transaction"));
 		}
 
-
 		const decryptionPayload = {
 			ciphertext: _upload.ciphertext,
 			policy_id: payload.policyId,
 			capsule_id: payload.capsuleId,
 			alice_pubkey: _alice.publicKey,
 			bob_pubkey: _bob.publicKey,
-			bob_privkey: _bob.bob_privkey,
+			bob_privkey: _bob.privateKey,
 			alice_signing_pubkey: payload.signedPublicKey,
 			other: {
 				hash: txData.hash,
@@ -290,5 +296,6 @@ const getInstance = async (app) => {
 
 
 export const ping = async (req, res) => {
+	
 	return res.status(200).json({ result: true });
 };

@@ -17,7 +17,6 @@ const schema = {
 	},
 	count: {
 		type: String,
-		required: true,
 	},
 	createdAt: {
 		type: Date,

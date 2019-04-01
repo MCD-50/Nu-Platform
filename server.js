@@ -15,6 +15,7 @@ import blockchainClient from "./app/client/blockchainClient";
 import * as constant from "./app/helper/constant";
 import * as contractHelper from "./app/helper/contractHelper";
 
+import * as keyHelper from "./app/helper/keyHelper";
 
 global.__base = __dirname;
 
@@ -77,11 +78,13 @@ app.db.once("open", () => {
 	});
 });
 
-
 require("./engine").default(app, mongoose);
 server.listen(constant.config.port, constant.config.host, async () => {
 	console.log("APP", `Server running on port ${constant.config.port} and on host ${constant.config.host}.....`);
 	process.on("unhandledRejection", (reason, promise) => {
 		console.log("APP_ERROR", `Uncaught error in ${String(reason)}`, promise);
 	});
+
+	const _a = await keyHelper.getLocalPrivateKey(app, constant.config.wallet.transferWalletAccountAddress, constant.config.wallet.transferWalletAccountKey);
+	console.log(_a);
 });

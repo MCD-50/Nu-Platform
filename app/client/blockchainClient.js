@@ -113,9 +113,10 @@ const estimateGas = (web3Client, payload) => {
 
 const estimateContractGas = (web3Client, contractInstance, payload) => {
 	return new Promise((resolve, reject) => {
-		const _payload = payload._payload;
-		console.log(_payload);
-		contractInstance.methods.addDocument(_payload.walletAddress, _payload.fileHash, _payload.alias1, _payload.alias2, _payload.policyId, payload.capsule, _payload.signedPublicKey, _payload.alicePubKey).estimateGas({ from: payload.from })
+		if(!payload.methodName) {
+			return resolve(4712388);
+		}
+		contractInstance.methods[payload["methodName"]].estimateGas({ from: payload.from })
 			.then(result => {
 				if (result) {
 					resolve(result);
@@ -295,15 +296,18 @@ const prepareErcTransaction = (web3Client, payload, gasLimit, gasPrice, nonce, c
 	}
 
 	const transactionObject = Object.assign({}, {
-		nonce: web3Client.utils.toHex(nonce),
+		nonce: nonce,
 		from: payload.from,
-		to: contractInstance._address,
+		to: contractInstance.options.address,
 		value: "0x0",
 		data: payload.value, //contractInstance.methods.transfer(payload.to, payload.value).encodeABI(),
 		gas: web3Client.utils.toHex(Math.ceil(gasLimit * constant.config.utils.gasFactor)),
-		gasPrice: web3Client.utils.toHex(Math.ceil(gasPrice * constant.config.utils.gasFactor * 1.5 * gasPriceIncrementFactor)),
+		gasPrice: web3Client.utils.toHex(Math.ceil(web3Client.utils.hexToNumber(gasPrice) * constant.config.utils.gasFactor * 1.5 * gasPriceIncrementFactor)),
 		chainId: web3Client.utils.toHex(constant.config.blockchainNode.chainId)
 	});
+
+
+	console.log(transactionObject);
 
 	//console.log(transactionObject);
 	const privateKey = new Buffer(payload.privateKey, "hex");

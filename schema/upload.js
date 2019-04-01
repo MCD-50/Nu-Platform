@@ -1,8 +1,7 @@
 const schema = {
 	accountAddress: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	detail: {
 		type: String,
@@ -11,6 +10,7 @@ const schema = {
 	capsuleId: {
 		type: String,
 		required: true,
+		unique: true,
 	},
 	ciphertext: {
 		type: String,

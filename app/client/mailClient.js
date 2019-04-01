@@ -39,12 +39,14 @@ class mailClient {
 		try {
 			// send mail with defined transport object
 			this.transporter.sendMail(mailOptions, (err, info) => {
+				console.log(err, info);
 				if (err) {
 					return null;
 				}
 				return 1;
 			});
 		} catch (exe) {
+			console.log(exe);
 			return null;
 		}
 

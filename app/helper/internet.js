@@ -16,7 +16,6 @@ export const platform = axios.create({
 	headers: {
 		"Content-Type": "application/json",
 		"Accept": "application/json",
-		"Authorization": constant.config.utils.authKey
 	}
 });
 
