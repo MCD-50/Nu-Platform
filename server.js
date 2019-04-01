@@ -84,7 +84,4 @@ server.listen(constant.config.port, constant.config.host, async () => {
 	process.on("unhandledRejection", (reason, promise) => {
 		console.log("APP_ERROR", `Uncaught error in ${String(reason)}`, promise);
 	});
-
-	const _a = await keyHelper.getLocalPrivateKey(app, constant.config.wallet.transferWalletAccountAddress, constant.config.wallet.transferWalletAccountKey);
-	console.log(_a);
 });
