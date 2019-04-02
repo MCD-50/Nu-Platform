@@ -37,7 +37,7 @@ export const createAccount = async (req, res) => {
 	}
 };
 
-export const createDocument = async (req, res) => {
+export const createUpload = async (req, res) => {
 	if (req.files && req.files.file && req.body.walletAddress && req.body.password && req.body.detail) {
 		const ipfs = await ipfsNode.getNode();
 
@@ -264,7 +264,11 @@ export const decryptData = async (req, res) => {
 		// now send and request to 
 		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${finalPayload.decrypted_data}. Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
 
-		return res.status(200).json({ result: true });
+		return res.status(200).json({
+			result: {
+				decryptedData: finalPayload.decrypted_data
+			}
+		});
 	} else {
 		// send the from hash
 		return res.status(400).json(collection.getErrorResponse("Something went wrong"));
@@ -296,6 +300,6 @@ const getInstance = async (app) => {
 
 
 export const ping = async (req, res) => {
-	
+
 	return res.status(200).json({ result: true });
 };

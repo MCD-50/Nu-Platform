@@ -3,13 +3,13 @@ export const routePath = require("path").join(__dirname, "../../app/controllers/
 
 export const routes = [
 	{ method: "post", endPoint: "createAccount@createAccount" },
-	{ method: "post", endPoint: "createDocument@createDocument" },
+	{ method: "post", endPoint: "createUpload@createUpload" },
 	{ method: "post", endPoint: "createGrant@createGrant" },
 	{ method: "get", endPoint: "processGrant@processGrant/:grantId/:uploadId" },
 	{ method: "post", endPoint: "decryptData@decryptData" },
 
 
-	{ method: "get", endPoint: "getGrants@getGrants" },
-	{ method: "get", endPoint: "getUploads@getUploads" },
+	{ method: "post", endPoint: "getGrants@getGrants" },
+	{ method: "post", endPoint: "getUploads@getUploads" },
 	{ method: "get", endPoint: "ping@ping" },
 ];
