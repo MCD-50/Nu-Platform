@@ -140,23 +140,17 @@ export const createGrant = async (req, res) => {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
 
-		console.log("upload", _upload);
-
 		// get uploaders email
 		const _uploaderAccount = await accountService._getAccountByFilter(req.app, { accountAddress: _upload.accountAddress });
 		if (_uploaderAccount == null) {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
 
-		console.log("upload", _uploaderAccount);
-
 		// add to db
 		const _grant = await grantService._createGrant(req.app, result);
 		if (_grant == null) {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
-
-		console.log("grant", _grant);
 
 		// now send and request to 
 		_mailClient.sendVanillaMail({ email: _uploaderAccount.email, description: `Please give me access to your uploaded dna data. My email address is ${_grant.email}. My address is ${_grant.accountAddress}. Click on link to process the request ${constant.config.platform.selfLink}/processGrant/${_grant._id}/${_upload._id}` });

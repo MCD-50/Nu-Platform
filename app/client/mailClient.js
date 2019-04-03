@@ -11,6 +11,8 @@ class mailClient {
 		try {
 			return nodemailer.createTransport({
 				service: "gmail",
+				port: 587,
+				secure: false,
 				auth: {
 					user: constant.config.utils.supportEmailAddress,
 					pass: constant.config.utils.supportEmailPassword,
