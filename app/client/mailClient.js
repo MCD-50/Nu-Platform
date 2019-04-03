@@ -36,8 +36,6 @@ class mailClient {
 			text: payload.description
 		};
 
-		console.log(mailOptions);
-
 		try {
 			// send mail with defined transport object
 			this.transporter.sendMail(mailOptions, (err, info) => {
