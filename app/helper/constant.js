@@ -1,7 +1,7 @@
 const configServer = require("../../configServer");
 export const config = configServer;
 
-export const CONTRACT_ADDRESS = "0xfa570b61f26367d9c0c72414717cb2afd554181b";
+export const CONTRACT_ADDRESS = "0xf5609d4f9d23525dcd056abeba700f82110204cb";
 export const BINARY_ABI = `[
 	{
 		"constant": true,
