@@ -269,7 +269,7 @@ export const decryptData = async (req, res) => {
 		delete decryptionPayload["other"];
 
 		const finalPayload = await securityClient.decrypt(decryptionPayload);
-		if (!finalPayload) {
+		if (!finalPayload || !finalPayload.decrypted_data) {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
 
