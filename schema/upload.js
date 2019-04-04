@@ -5,7 +5,8 @@ const schema = {
 	},
 	detail: {
 		type: String,
-		required: true
+		required: true,
+		unique: true,
 	},
 	capsuleId: {
 		type: String,
@@ -15,6 +16,7 @@ const schema = {
 	ciphertext: {
 		type: String,
 		required: true,
+		unique: true,
 	},
 	transactionHash: {
 		type: String,
