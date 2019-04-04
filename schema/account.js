@@ -12,7 +12,6 @@ const schema = {
 	password: {
 		type: String,
 		required: true,
-		unique: true
 	},
 	publicKey : {
 		type: String,
