@@ -146,6 +146,10 @@ export const createGrant = async (req, res) => {
 			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
 		}
 
+		if (_upload.accountAddress == result.accountAddress) {
+			return res.status(400).json(collection.getErrorResponse("Action not valid"));
+		}
+
 		// get uploaders email
 		const _uploaderAccount = await accountService._getAccountByFilter(req.app, { accountAddress: _upload.accountAddress });
 		if (_uploaderAccount == null) {
