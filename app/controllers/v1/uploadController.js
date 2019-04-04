@@ -283,7 +283,6 @@ export const decryptData = async (req, res) => {
 		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${fileUrl} Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
 
 		// delete key
-		await req.app.redisHelper.delete(req.body.decryptId);
 		return res.status(200).json({
 			result: {
 				decryptedData: fileUrl
