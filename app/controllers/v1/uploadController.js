@@ -17,6 +17,9 @@ export const createAccount = async (req, res) => {
 		// first get address from web3
 		const walletAddress = await req.app.web3Helper.newAccount(req.body.password);
 		const nucypherAddresses = await securityClient.genkey();
+		if (!nucypherAddresses) {
+			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+		}
 
 		const result = {
 			email: req.body.email,
@@ -69,6 +72,9 @@ export const createUpload = async (req, res) => {
 				// call nucypher
 
 				const encryptedDataPayload = await securityClient.encrypt(files[0].hash, _account.publicKey, _account.privateKey);
+				if (!encryptedDataPayload) {
+					return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+				}
 				// call smart contract service
 
 				const payload = {
@@ -189,6 +195,9 @@ export const processGrant = async (req, res) => {
 
 		// call the grant method
 		const nucypherDataPayload = await securityClient.grant(_upload.capsuleId, _alice.publicKey, _alice.privateKey, _bob.publicKey);
+		if (!nucypherDataPayload) {
+			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+		}
 
 		// push this data on the blockchain
 		const payload = {
@@ -260,6 +269,9 @@ export const decryptData = async (req, res) => {
 		delete decryptionPayload["other"];
 
 		const finalPayload = await securityClient.decrypt(decryptionPayload);
+		if (!finalPayload) {
+			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+		}
 
 		const fileUrl = `https://ipfs.io/ipfs/${finalPayload.decrypted_data}/`;
 
