@@ -238,7 +238,7 @@ export const processGrant = async (req, res) => {
 		await grantService._updateGrant(req.app, req.params.grantId, Number(_grant.count) + 1);
 
 		// now send and request to 
-		_mailClient.sendVanillaMail({ email: _grant.email, description: `Your proxy decryption secret decoder key  = ${decryptKey} This key is valid for 10 mins only` });
+		_mailClient.sendVanillaMail({ email: _grant.email, description: `Your proxy decryption secret decoder key is ${decryptKey} This key is valid for 10 mins only` });
 
 		return res.status(200).json({ result: true });
 	} else {
@@ -261,12 +261,14 @@ export const decryptData = async (req, res) => {
 
 		const finalPayload = await securityClient.decrypt(decryptionPayload);
 
+		const fileUrl = `https://ipfs.io/ipfs/${finalPayload.decrypted_data}/`;
+
 		// now send and request to 
-		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${finalPayload.decrypted_data}. Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
+		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${fileUrl} Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
 
 		return res.status(200).json({
 			result: {
-				decryptedData: finalPayload.decrypted_data
+				decryptedData: fileUrl
 			}
 		});
 	} else {
