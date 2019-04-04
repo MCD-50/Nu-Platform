@@ -274,7 +274,7 @@ export const decryptData = async (req, res) => {
 
 		const finalPayload = await securityClient.decrypt(decryptionPayload);
 		if (!finalPayload || !finalPayload.decrypted_data) {
-			return res.status(400).json(collection.getErrorResponse("Something went wrong"));
+			return res.status(400).json(collection.getErrorResponse("Data already decrypted."));
 		}
 
 		const fileUrl = `https://ipfs.io/ipfs/${finalPayload.decrypted_data}/`;
@@ -282,6 +282,8 @@ export const decryptData = async (req, res) => {
 		// now send and request to 
 		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${fileUrl} Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
 
+		// delete key
+		await req.app.redisHelper.delete(req.body.decryptId);
 		return res.status(200).json({
 			result: {
 				decryptedData: fileUrl
