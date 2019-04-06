@@ -1,7 +1,7 @@
 # Nu-Platform
 
 ## Demo Url
-(http://35.200.190.101:10002)
+http://35.200.190.101:10002
 
 ###### Genobank DNA wallet
 
