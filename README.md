@@ -1,5 +1,8 @@
 # Nu-Platform
 
+## Demo Url
+(http://35.200.190.101:10002)
+
 ###### Genobank DNA wallet
 
 > To empower the world to upload FDA approved Saliva DNA extraction information on blockchain, stored on IPFS to enable an anonymous and encrypted way powered by NuChyper to interact with the World’s Genomic ecosystem with privacy & control.
@@ -54,7 +57,7 @@
 - Upon decode request the kfrags will be extracted and attached to the capsule (fetched from capsule map using capsuleId). And decrypted IPFS file link will be shared with the Alice.
 
 
-###### This explains our platform working in a nutshell. This is just and POC product.
+###### This explains our platform (POC) working in a nutshell.
 
 ## Challenges we faced
 
@@ -85,3 +88,12 @@
 * Daneil Uribe
 * Sagar Jethi
 * Ayush A.
+
+## Video link
+
+* About platform : 
+* Platform demo : 
+
+## Screenshots
+
+
