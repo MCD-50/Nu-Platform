@@ -70,6 +70,7 @@ http://35.200.190.101:10002 (frontend platform url)
 * Faced a lot of problems in set_correction_keys modules
 * 16 Variable limit in solidity fuction
 * and few we didn't counted on.
+* IPFS uploaded file not showing on public gateway. 
 
 ## Futures improvements
 
@@ -101,4 +102,7 @@ http://35.200.190.101:10002 (frontend platform url)
 
 ## Screenshots
 
-
+![Screenshot](UploadFile.png)
+![Screenshot](UploadHistory.png)
+![Screenshot](RequestAccess.png)
+![Screenshot](Decode.png)
