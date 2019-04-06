@@ -68,6 +68,8 @@ export const createUpload = async (req, res) => {
 				throw err;
 			}
 
+			console.log(files);
+
 			if (files.length > 0) {
 				// call nucypher
 
