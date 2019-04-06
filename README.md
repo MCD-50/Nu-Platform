@@ -102,7 +102,7 @@ http://35.200.190.101:10002 (frontend platform url)
 
 ## Screenshots
 
-![Screenshot](UploadFile.png)
-![Screenshot](UploadHistory.png)
-![Screenshot](RequestAccess.png)
-![Screenshot](Decode.png)
+* ![Screenshot](UploadFile.png)
+* ![Screenshot](UploadHistory.png)
+* ![Screenshot](RequestAccess.png)
+* ![Screenshot](Decode.png)
