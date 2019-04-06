@@ -26,6 +26,7 @@
 		"express-fileupload": "^0.4.0",
 		"fs": "0.0.1-security",
 		"ipfs": "^0.31.4",
+		"ipfs-api": "^26.1.2",
 		"ipfs-http-client": "^30.1.1",
 		"keythereum": "^1.0.2",
 		"kue": "^0.11.6",
