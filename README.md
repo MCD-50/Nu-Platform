@@ -1,12 +1,12 @@
 # Nu-Platform
 
 ## Demo Url
-http://35.200.190.101:10002
+http://35.200.190.101:10002 (frontend platform url)
 
 ## Other Urls
-http://35.200.190.101:8545 (private blockchain url)
-http://35.200.190.101:10003 (private explorer url)
-http://35.200.190.101:10001 (backend api url)
+* http://35.200.190.101:8545 (private blockchain url)
+* http://35.200.190.101:10003 (private explorer url)
+* http://35.200.190.101:10001 (backend api url)
 
 ###### Genobank DNA wallet
 
