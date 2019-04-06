@@ -282,7 +282,7 @@ export const decryptData = async (req, res) => {
 		const fileUrl = `https://ipfs.io/ipfs/${finalPayload.decrypted_data}/`;
 
 		// now send and request to 
-		_mailClient.sendVanillaMail({ email: other.email, description: `The DNA file url is : ${fileUrl} Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
+		_mailClient.sendVanillaMail({ email: other.email, description: `IPFS file usually take <30 mins to appear. The DNA file url is : ${fileUrl} Thanks for using the nucypher proxy re-encryption. Blockchain transaction hash for this transaction is ${other.hash}` });
 
 		// delete key
 		return res.status(200).json({
