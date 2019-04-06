@@ -1,4 +1,10 @@
 # Nu-Platform
+> This repository contains code related to platform of Genobank DNA wallet. Implemented using the NodeJs uses Nucypher microservice, IPFS and mongo for storage.
+
+> For Platform visit https://github.com/mcd-50/Nu-Platform
+> For NuCypher visit https://github.com/mcd-50/Nu-Umbral
+> For Solidity visit https://github.com/mcd-50/Nu-Solidity
+> For Frontend visit https://github.com/mcd-50/Nu-Frontend
 
 ## Demo Url
 http://35.200.190.101:10002 (frontend platform url)
@@ -97,8 +103,7 @@ http://35.200.190.101:10002 (frontend platform url)
 
 ## Video link
 
-* About platform : 
-* Platform demo : 
+* Platform demo : https://youtu.be/sm4m0u8PJh0
 
 ## Screenshots
 
