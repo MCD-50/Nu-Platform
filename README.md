@@ -3,6 +3,11 @@
 ## Demo Url
 http://35.200.190.101:10002
 
+## Other Urls
+http://35.200.190.101:8545 (private blockchain url)
+http://35.200.190.101:10003 (private explorer url)
+http://35.200.190.101:10001 (backend api url)
+
 ###### Genobank DNA wallet
 
 > To empower the world to upload FDA approved Saliva DNA extraction information on blockchain, stored on IPFS to enable an anonymous and encrypted way powered by NuChyper to interact with the World’s Genomic ecosystem with privacy & control.
