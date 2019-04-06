@@ -1,5 +1,5 @@
-const IPFS = require("ipfs-api");
-const node = IPFS("ipfs.infura.io", "5001", {protocol: "https"});
+const IPFS = require("ipfs");
+const node = IPFS({ host: "localhost", port: 5001, protocol: "http" });
 //const node = new IPFS({ host: "localhost", port: 5001, protocol: "http" });
 
 let nodeFactory = null;
